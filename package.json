@@ -1,0 +1,11 @@
+{
+  "name": "harry-poter-assignment",
+  "version": "1.0.0",
+  "description": "My take on the assignent of calculating the lowest price from a given set of Harry Potter books with differnt discount",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha --exit"
+  },
+  "author": "Ivan Spoljaric",
+  "license": "ISC"
+}
