@@ -10,14 +10,20 @@ const assertResponse = basicCases => {
 
 const basePrice = ShoppingCart.getBasePrice();
 
-
-describe('Harry Potter books', function () {
-  it('Basic tests with total zero or 1 recuring unique book', function () {
+describe('Test suite for the Harry Potter books savings algorithm', function () {
+  it('Zero books', function () {
     const basicCases = [
       {
         dummyShoppingCart: new ShoppingCart([0, 0, 0, 0, 0]),
         expected: 0,
-      },
+      }
+    ]
+
+    assertResponse(basicCases);
+  });
+
+  it('1 or multiple books from the same (but single) series (without discount)', function () {
+    const basicCases = [
       {
         dummyShoppingCart: new ShoppingCart([1, 0, 0, 0, 0]),
         expected: basePrice,
@@ -39,7 +45,7 @@ describe('Harry Potter books', function () {
     assertResponse(basicCases);
   });
 
-  it('Basic tests with simple discount combinations', function () {
+  it('Multiple books from diff. series (single type of discount)', function () {
     const basicCases = [
       {
         dummyShoppingCart: new ShoppingCart([1, 1, 0, 0, 0]),
@@ -62,7 +68,7 @@ describe('Harry Potter books', function () {
     assertResponse(basicCases);
   });
 
-  it('Test with multiple discounts per shoppingCart', function () {
+  it('Multiple books from diff. series (multiple types of discount)', function () {
     const basicCases = [
       {
         dummyShoppingCart: new ShoppingCart([1, 2, 0, 0, 0]),
@@ -85,7 +91,7 @@ describe('Harry Potter books', function () {
     assertResponse(basicCases);
   });
 
-  it('Edge case tests', function () {
+  it('Interesting edge case tests (multiple types of discount)', function () {
     const basicCases = [
       {
         dummyShoppingCart: new ShoppingCart([2, 2, 2, 1, 1]),
@@ -93,7 +99,7 @@ describe('Harry Potter books', function () {
       },
       {
         dummyShoppingCart: new ShoppingCart([5, 5, 4, 5, 4]),
-        expected: 3 * 5 * basePrice * ShoppingCart.getDiscounts(5) + 2 * 4 * ShoppingCart.getDiscounts(4),
+        expected: 3 * 5 * basePrice * ShoppingCart.getDiscounts(5) + 2 * 4 * basePrice * ShoppingCart.getDiscounts(4),
       },
     ];
 
