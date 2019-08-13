@@ -52,4 +52,4 @@ So [2,2,2,1,1] means that there are;
 
 ## Ideas for additional optimization
 
-Memoize the recursive calls of calcLowestPrice() method to avoid calling it with the same argument.
+Memoize the recursive calls of calcLowestPrice() method to avoid calling it repeatedly with the same argument.
