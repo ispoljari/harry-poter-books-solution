@@ -3,7 +3,7 @@ const ShoppingCart = require('../script.js');
 
 const assertResponse = basicCases => {
   basicCases.forEach(input => {
-    const totalPrice = input.dummyShoppingCart.calcLowestPrice();
+    const totalPrice = input.dummyShoppingCart.calcLowestPrice(input.dummyShoppingCart.cart);
     expect(totalPrice).to.equal(input.expected);
   });
 }

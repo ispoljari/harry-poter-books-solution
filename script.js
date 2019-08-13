@@ -47,22 +47,30 @@ class ShoppingCart {
 
     // apply the largest discount
 
-    const tempBiggestDiscount = numOfUniqueBooks * basePrice * getDiscounts(numOfUniqueBooks);
+    const tempBiggestDiscount = numOfUniqueBooks * basePrice * ShoppingCart.getDiscounts(numOfUniqueBooks);
+
     const largerCart = [...cart];
 
-    largerCart.forEach(book => book--);
+    for (let i = 0; i < largerCart.length; i++) {
+      largerCart[i]--;
+    };
 
     // apply the second largest discount
 
-    const tempSeconLargestDiscount = (numOfUniqueBooks - 1) * basePrice * getDiscounts(numOfUniqueBooks - 1);
+    const tempSeconLargestDiscount = (numOfUniqueBooks - 1) * basePrice * ShoppingCart.getDiscounts(numOfUniqueBooks - 1);
+
     const smallerCart = [...cart];
 
-    smallerCart.forEach(book => book--);
+    for (let i = 0; i < smallerCart.length; i++) {
+      if (i !== 0) {
+        smallerCart[i]--;
+      }
+    };
 
-    // const largerCartTotal = (tempBiggestDiscount + this.calcLowestPrice(largerCart));
-    // const smallerCartTotal = (tempSeconLargestDiscount + this.calcLowestPrice(smallerCart));
+    const largerCartTotal = (tempBiggestDiscount + this.calcLowestPrice(largerCart));
+    const smallerCartTotal = (tempSeconLargestDiscount + this.calcLowestPrice(smallerCart));
 
-    return null;
+    return Math.min(largerCartTotal, smallerCartTotal);
   }
 }
 
