@@ -1,5 +1,5 @@
 const { expect } = require('chai');
-const BooksShoppingCart = require('../cart-model.js');
+const BooksShoppingCart = require('../models/cart-model.js');
 
 const assertResponse = basicCases => {
   basicCases.forEach(({ dummyShoppingCart, expected }) => {

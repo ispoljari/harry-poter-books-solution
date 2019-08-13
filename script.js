@@ -1,4 +1,4 @@
-const BooksShoppingCart = require('./cart-model.js');
+const BooksShoppingCart = require('./models/cart-model.js');
 
 const args = process.argv.slice(2);
 const books = JSON.parse(args[0]);
