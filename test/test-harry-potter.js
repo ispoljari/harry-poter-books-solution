@@ -6,6 +6,12 @@ const { calcLowestPrice, basePrice, discounts } = import('./main.js'); //TODO:
 //   return faker.random.number(min = minValue, max = maxValue);
 // }
 
+const assertResponse = basicCases => {
+  basicCases.forEach(input => {
+    const totalPrice = calcLowestPrice(input.dummyShoppingCart);
+    expect(totalPrice).to.equal(input.expected);
+  });
+}
 
 
 describe('Harry Potter books', function () {
@@ -33,10 +39,7 @@ describe('Harry Potter books', function () {
       },
     ];
 
-    basicCases.forEach(input => {
-      const totalPrice = calcLowestPrice(input.dummyShoppingCart);
-      expect(totalPrice).to.equal(input.expected);
-    });
+    assertResponse(basicCases); //TODO: check if this abstraction will work
   });
 
   it('Basic tests with simple discount combinations', function () {
@@ -59,10 +62,7 @@ describe('Harry Potter books', function () {
       },
     ];
 
-    basicCases.forEach(input => {
-      const totalPrice = calcLowestPrice(input.dummyShoppingCart);
-      expect(totalPrice).to.equal(input.expected);
-    });
+    assertResponse(basicCases);
   });
 
   it('Test with multiple discounts per shoppingCart', function () {
@@ -85,9 +85,6 @@ describe('Harry Potter books', function () {
       },
     ];
 
-    basicCases.forEach(input => {
-      const totalPrice = calcLowestPrice(input.dummyShoppingCart);
-      expect(totalPrice).to.equal(input.expected);
-    });
+    assertResponse(basicCases);
   });
 });
