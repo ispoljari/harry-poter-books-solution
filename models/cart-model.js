@@ -36,7 +36,7 @@ class BooksShoppingCart {
 
     return {
       filteredCart: tempCart,
-      numOfUniqueBooks: tempCart.length
+      numOfUniqueBooks: tempCart.length,
     };
   }
 
@@ -54,6 +54,20 @@ class BooksShoppingCart {
     return tempCart;
   }
 
+  calcTempDiscount(cart, numOfUniqueBooks, decr) {
+    const basePrice = BooksShoppingCart.getBasePrice();
+    const tempCart = [...cart];
+
+    for (let i = 0 + decr; i < tempCart.length; i++) {
+      tempCart[i]--;
+    };
+
+    return {
+      tempDiscount: (numOfUniqueBooks - decr) * basePrice * BooksShoppingCart.getDiscounts(numOfUniqueBooks - decr),
+      tempCart,
+    }
+  }
+
   calcLowestPrice(cart = this.cart) {
     const basePrice = BooksShoppingCart.getBasePrice();
     const { filteredCart, numOfUniqueBooks } = this.filterOutUniqueBooks(cart);
@@ -68,28 +82,11 @@ class BooksShoppingCart {
 
     const filteredSortedCart = this.sortCart(filteredCart, 'asc');
 
-    // apply the largest discount
+    const { tempDiscount: tempLargerDiscount, tempCart: tempLargerCart } = this.calcTempDiscount(filteredSortedCart, numOfUniqueBooks, 0);
+    const { tempDiscount: tempSmallerDiscount, tempCart: tempSmallerCart } = this.calcTempDiscount(filteredSortedCart, numOfUniqueBooks, 1);
 
-    const tempBiggestDiscount = numOfUniqueBooks * basePrice * BooksShoppingCart.getDiscounts(numOfUniqueBooks);
-    const largerCart = [...filteredSortedCart];
-
-    for (let i = 0; i < largerCart.length; i++) {
-      largerCart[i]--;
-    };
-
-    // apply the second largest discount
-
-    const tempSeconLargestDiscount = (numOfUniqueBooks - 1) * basePrice * BooksShoppingCart.getDiscounts(numOfUniqueBooks - 1);
-    const smallerCart = [...filteredSortedCart];
-
-    for (let i = 0; i < smallerCart.length; i++) {
-      if (i !== 0) {
-        smallerCart[i]--;
-      }
-    };
-
-    const largerCartTotal = (tempBiggestDiscount + this.calcLowestPrice(largerCart));
-    const smallerCartTotal = (tempSeconLargestDiscount + this.calcLowestPrice(smallerCart));
+    const largerCartTotal = (tempLargerDiscount + this.calcLowestPrice(tempLargerCart));
+    const smallerCartTotal = (tempSmallerDiscount + this.calcLowestPrice(tempSmallerCart));
 
     return Math.min(largerCartTotal, smallerCartTotal);
   }
