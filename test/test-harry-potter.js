@@ -39,7 +39,7 @@ describe('Harry Potter books', function () {
     });
   });
 
-  it('Basic test with simple discount combinations', function () {
+  it('Basic tests with simple discount combinations', function () {
     const basicCases = [
       {
         dummyShoppingCart: [1, 1, 0, 0, 0],
@@ -62,6 +62,32 @@ describe('Harry Potter books', function () {
     basicCases.forEach(input => {
       const totalPrice = calcLowestPrice(input.dummyShoppingCart);
       expect(totalPrice).to.equal(input.expected);
-    })
+    });
+  });
+
+  it('Test with multiple discounts per shoppingCart', function () {
+    const basicCases = [
+      {
+        dummyShoppingCart: [1, 2, 0, 0, 0],
+        expected: 2 * basePrice * discounts.twoUniqueBooks + basePrice,
+      },
+      {
+        dummyShoppingCart: [0, 0, 0, 2, 2],
+        expected: 2 * 2 * basePrice * discounts.twoUniqueBooks,
+      },
+      {
+        dummyShoppingCart: [0, 2, 1, 2, 1],
+        expected: 4 * basePrice * discounts.fourUniqueBooks + 2 * basePrice * discounts.twoUniqueBooks,
+      },
+      {
+        dummyShoppingCart: [1, 2, 1, 1, 1],
+        expected: 5 * basePrice * discounts.fiveUniqueBooks + basePrice,
+      },
+    ];
+
+    basicCases.forEach(input => {
+      const totalPrice = calcLowestPrice(input.dummyShoppingCart);
+      expect(totalPrice).to.equal(input.expected);
+    });
   });
 });
