@@ -25,28 +25,42 @@ class ShoppingCart {
     }
   }
 
-  calcLowestPrice() {
-    const cartCopy = [...this.cart];
+  calcLowestPrice(cart) {
     const basePrice = ShoppingCart.getBasePrice();
 
-    for (let i = cartCopy.length - 1; i >= 0; i--) {
-      if (cartCopy[i] === 0) {
-        cartCopy.splice(i, 1);
+    for (let i = cart.length - 1; i >= 0; i--) {
+      if (cart[i] === 0) {
+        cart.splice(i, 1);
       }
     }
 
-    if (cartCopy.length === 0) {
+    if (cart.length === 0) {
       return 0;
     }
 
-    if (cartCopy.length === 1) {
-      return cartCopy[0] * basePrice;
+    if (cart.length === 1) {
+      return cart[0] * basePrice;
     }
 
-    cartCopy.sort((a, b) => a - b);
-    const numOfUniqueBooks = cartCopy.length;
+    cart.sort((a, b) => a - b);
+    const numOfUniqueBooks = cart.length;
 
-    const tempBiggestDiscount = numOfUniqueBooks * basePrice * ()
+    // apply the largest discount
+
+    const tempBiggestDiscount = numOfUniqueBooks * basePrice * getDiscounts(numOfUniqueBooks);
+    const largerCart = [...cart];
+
+    largerCart.forEach(book => book--);
+
+    // apply the second largest discount
+
+    const tempSeconLargestDiscount = (numOfUniqueBooks - 1) * basePrice * getDiscounts(numOfUniqueBooks - 1);
+    const smallerCart = [...cart];
+
+    smallerCart.forEach(book => book--);
+
+    // const largerCartTotal = (tempBiggestDiscount + this.calcLowestPrice(largerCart));
+    // const smallerCartTotal = (tempSeconLargestDiscount + this.calcLowestPrice(smallerCart));
 
     return null;
   }
