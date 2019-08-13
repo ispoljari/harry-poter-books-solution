@@ -25,7 +25,7 @@ class BooksShoppingCart {
     }
   }
 
-  filterOutUniqueBooks(cart = this.cart) {
+  filterOutUniqueBooks(cart) {
     const tempCart = [...cart];
 
     for (let i = tempCart.length - 1; i >= 0; i--) {
@@ -54,7 +54,7 @@ class BooksShoppingCart {
     return tempCart;
   }
 
-  calcLowestPrice(cart) {
+  calcLowestPrice(cart = this.cart) {
     const basePrice = BooksShoppingCart.getBasePrice();
     const { filteredCart, numOfUniqueBooks } = this.filterOutUniqueBooks(cart);
 
