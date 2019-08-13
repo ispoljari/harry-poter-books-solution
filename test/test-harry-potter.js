@@ -87,4 +87,19 @@ describe('Harry Potter books', function () {
 
     assertResponse(basicCases);
   });
+
+  it('Test some edge cases', function () {
+    const basicCases = [
+      {
+        dummyShoppingCart: [2, 2, 2, 1, 1],
+        expected: 2 * 4 * basePrice * discounts.fourUniqueBooks,
+      },
+      {
+        dummyShoppingCart: [5, 5, 4, 5, 4],
+        expected: 3 * 5 * basePrice * discounts.fiveUniqueBooks + 2 * 4 * discounts.fourUniqueBooks,
+      },
+    ];
+
+    assertResponse(basicCases);
+  });
 });
