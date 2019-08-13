@@ -1,15 +1,13 @@
 const basePrice = 8;
 
-const discounts = () => ({
+const discounts = {
   twoUniqueBooks: 0.95,
   threeUniqueBooks: 0.9,
-  fourUniqueBooks: 0.85,
+  fourUniqueBooks: 0.8,
   fiveUniqueBooks: 0.75,
-});
-
-const calcLowestPrice = () => {
-  return 0;
 };
+
+const calcLowestPrice = shoppingCart => 0;
 
 module.exports = {
   basePrice,

@@ -1,10 +1,5 @@
 const { expect } = require('chai');
-const faker = import('faker');
-const { calcLowestPrice, basePrice, discounts } = import('./main.js'); //TODO:
-
-// const generateRandNumber = (minValue, maxValue) => {
-//   return faker.random.number(min = minValue, max = maxValue);
-// }
+const { calcLowestPrice, basePrice, discounts } = require('../script.js'); //TODO:
 
 const assertResponse = basicCases => {
   basicCases.forEach(input => {
@@ -88,7 +83,7 @@ describe('Harry Potter books', function () {
     assertResponse(basicCases);
   });
 
-  it('Test some edge cases', function () {
+  it('Edge case tests', function () {
     const basicCases = [
       {
         dummyShoppingCart: [2, 2, 2, 1, 1],
