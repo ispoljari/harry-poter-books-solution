@@ -1,4 +1,4 @@
-# Solution to the Harry Poter min. price of a set of books
+# Solution to the Harry Poter book set calculator
 
 ## Task Description
 

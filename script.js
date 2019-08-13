@@ -6,4 +6,4 @@ const books = JSON.parse(args[0]);
 const cart = new BooksShoppingCart(books);
 const minPrice = cart.calcLowestPrice();
 
-console.log(minPrice);
+console.log(`The price with the biggest discount for the book cart [${books}] is ${minPrice} euros`);
