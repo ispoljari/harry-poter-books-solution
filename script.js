@@ -17,7 +17,23 @@ class ShoppingCart {
   }
 
   calcLowestPrice() {
-    return 0;
+    const cartCopy = [...this.cart];
+
+    for (let i = cartCopy.length - 1; i >= 0; i--) {
+      if (cartCopy[i] === 0) {
+        cartCopy.splice(i, 1);
+      }
+    }
+
+    if (cartCopy.length === 0) {
+      return 0;
+    }
+
+    if (cartCopy.length === 1) {
+      return cartCopy[0] * ShoppingCart.getBasePrice();
+    }
+
+    return null;
   }
 }
 

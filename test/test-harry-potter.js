@@ -17,7 +17,7 @@ describe('Harry Potter books', function () {
     const basicCases = [
       {
         dummyShoppingCart: new ShoppingCart([0, 0, 0, 0, 0]),
-        expected: basePrice,
+        expected: 0,
       },
       {
         dummyShoppingCart: new ShoppingCart([1, 0, 0, 0, 0]),
