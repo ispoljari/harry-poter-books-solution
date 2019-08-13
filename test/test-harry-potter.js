@@ -9,7 +9,6 @@ const assertResponse = basicCases => {
 }
 
 const basePrice = ShoppingCart.getBasePrice();
-const discounts = ShoppingCart.getDiscounts();
 
 
 describe('Harry Potter books', function () {
@@ -44,19 +43,19 @@ describe('Harry Potter books', function () {
     const basicCases = [
       {
         dummyShoppingCart: new ShoppingCart([1, 1, 0, 0, 0]),
-        expected: 2 * basePrice * discounts.twoUniqueBooks,
+        expected: 2 * basePrice * ShoppingCart.getDiscounts(2),
       },
       {
         dummyShoppingCart: new ShoppingCart([1, 1, 1, 0, 0]),
-        expected: 3 * basePrice * discounts.threeUniqueBooks,
+        expected: 3 * basePrice * ShoppingCart.getDiscounts(3),
       },
       {
         dummyShoppingCart: new ShoppingCart([1, 1, 1, 1, 0]),
-        expected: 4 * basePrice * discounts.fourUniqueBooks,
+        expected: 4 * basePrice * ShoppingCart.getDiscounts(4),
       },
       {
         dummyShoppingCart: new ShoppingCart([1, 1, 1, 1, 1]),
-        expected: 5 * basePrice * discounts.fiveUniqueBooks,
+        expected: 5 * basePrice * ShoppingCart.getDiscounts(5),
       },
     ];
 
@@ -67,19 +66,19 @@ describe('Harry Potter books', function () {
     const basicCases = [
       {
         dummyShoppingCart: new ShoppingCart([1, 2, 0, 0, 0]),
-        expected: 2 * basePrice * discounts.twoUniqueBooks + basePrice,
+        expected: 2 * basePrice * ShoppingCart.getDiscounts(2) + basePrice,
       },
       {
         dummyShoppingCart: new ShoppingCart([0, 0, 0, 2, 2]),
-        expected: 2 * 2 * basePrice * discounts.twoUniqueBooks,
+        expected: 2 * 2 * basePrice * ShoppingCart.getDiscounts(2),
       },
       {
         dummyShoppingCart: new ShoppingCart([0, 2, 1, 2, 1]),
-        expected: 4 * basePrice * discounts.fourUniqueBooks + 2 * basePrice * discounts.twoUniqueBooks,
+        expected: 4 * basePrice * ShoppingCart.getDiscounts(4) + 2 * basePrice * ShoppingCart.getDiscounts(2),
       },
       {
         dummyShoppingCart: new ShoppingCart([1, 2, 1, 1, 1]),
-        expected: 5 * basePrice * discounts.fiveUniqueBooks + basePrice,
+        expected: 5 * basePrice * ShoppingCart.getDiscounts(5) + basePrice,
       },
     ];
 
@@ -90,11 +89,11 @@ describe('Harry Potter books', function () {
     const basicCases = [
       {
         dummyShoppingCart: new ShoppingCart([2, 2, 2, 1, 1]),
-        expected: 2 * 4 * basePrice * discounts.fourUniqueBooks,
+        expected: 2 * 4 * basePrice * ShoppingCart.getDiscounts(4),
       },
       {
         dummyShoppingCart: new ShoppingCart([5, 5, 4, 5, 4]),
-        expected: 3 * 5 * basePrice * discounts.fiveUniqueBooks + 2 * 4 * discounts.fourUniqueBooks,
+        expected: 3 * 5 * basePrice * ShoppingCart.getDiscounts(5) + 2 * 4 * ShoppingCart.getDiscounts(4),
       },
     ];
 
