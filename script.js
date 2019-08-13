@@ -17,7 +17,7 @@ class ShoppingCart {
   }
 
   calcLowestPrice() {
-    return 'dummy';
+    return 0;
   }
 }
 
