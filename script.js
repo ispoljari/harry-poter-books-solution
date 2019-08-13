@@ -1,4 +1,4 @@
-class ShoppingCart {
+class BooksShoppingCart {
   constructor(cart) {
     this.cart = cart
   }
@@ -25,31 +25,53 @@ class ShoppingCart {
     }
   }
 
-  calcLowestPrice(cart) {
-    const basePrice = ShoppingCart.getBasePrice();
+  filterOutUniqueBooks(cart) {
+    const tempCart = [...cart];
 
-    for (let i = cart.length - 1; i >= 0; i--) {
-      if (cart[i] === 0) {
-        cart.splice(i, 1);
+    for (let i = tempCart.length - 1; i >= 0; i--) {
+      if (tempCart[i] === 0) {
+        tempCart.splice(i, 1);
       }
     }
 
-    if (cart.length === 0) {
+    return {
+      filteredCart: tempCart,
+      numOfUniqueBooks: tempCart.length
+    };
+  }
+
+  sortCart(cart, by) {
+    const tempCart = [...cart];
+    let compareFunction;
+
+    if (by === 'asc') {
+      compareFunction = (a, b) => a - b;
+    } else {
+      compareFunction = (a, b) => b - a;
+    }
+
+    tempCart.sort(compareFunction);
+    return tempCart;
+  }
+
+  calcLowestPrice(cart) {
+    const basePrice = BooksShoppingCart.getBasePrice();
+    const { filteredCart, numOfUniqueBooks } = this.filterOutUniqueBooks(cart);
+
+    if (numOfUniqueBooks === 0) {
       return 0;
     }
 
-    if (cart.length === 1) {
-      return cart[0] * basePrice;
+    if (numOfUniqueBooks === 1) {
+      return filteredCart[0] * basePrice;
     }
 
-    cart.sort((a, b) => a - b);
-    const numOfUniqueBooks = cart.length;
+    const filteredSortedCart = this.sortCart(filteredCart, 'asc');
 
     // apply the largest discount
 
-    const tempBiggestDiscount = numOfUniqueBooks * basePrice * ShoppingCart.getDiscounts(numOfUniqueBooks);
-
-    const largerCart = [...cart];
+    const tempBiggestDiscount = numOfUniqueBooks * basePrice * BooksShoppingCart.getDiscounts(numOfUniqueBooks);
+    const largerCart = [...filteredSortedCart];
 
     for (let i = 0; i < largerCart.length; i++) {
       largerCart[i]--;
@@ -57,9 +79,8 @@ class ShoppingCart {
 
     // apply the second largest discount
 
-    const tempSeconLargestDiscount = (numOfUniqueBooks - 1) * basePrice * ShoppingCart.getDiscounts(numOfUniqueBooks - 1);
-
-    const smallerCart = [...cart];
+    const tempSeconLargestDiscount = (numOfUniqueBooks - 1) * basePrice * BooksShoppingCart.getDiscounts(numOfUniqueBooks - 1);
+    const smallerCart = [...filteredSortedCart];
 
     for (let i = 0; i < smallerCart.length; i++) {
       if (i !== 0) {
@@ -75,4 +96,4 @@ class ShoppingCart {
 }
 
 
-module.exports = ShoppingCart;
+module.exports = BooksShoppingCart;
