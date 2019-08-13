@@ -1,10 +1,10 @@
 const { expect } = require('chai');
-const BooksShoppingCart = require('../script.js');
+const BooksShoppingCart = require('../cart-model.js');
 
 const assertResponse = basicCases => {
-  basicCases.forEach(input => {
-    const totalPrice = input.dummyShoppingCart.calcLowestPrice(input.dummyShoppingCart.cart);
-    expect(totalPrice).to.equal(input.expected);
+  basicCases.forEach(({ dummyShoppingCart, expected }) => {
+    const totalPrice = dummyShoppingCart.calcLowestPrice();
+    expect(totalPrice).to.equal(expected);
   });
 }
 
