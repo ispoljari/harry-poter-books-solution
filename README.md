@@ -34,7 +34,7 @@ The problem needs to be solved using test-driven development: http://en.wikipedi
 4. npm run test
 5. node script.js [2,2,2,1,1]
 
-The input vector into the script is assumed to an array with 5 items. Each item represents a different Harry Potter book series.
+The input vector into the script is assumed to be an array with 5 numbers. Each number represents a book quantity from different book series.
 
 This is the structure [firstBookQuantity, secondBookQuantity, thirdBookQuantity, fourthBookQuantity, fifthBookQuantity]
 
