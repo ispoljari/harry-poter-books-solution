@@ -33,6 +33,8 @@ class ShoppingCart {
       return cartCopy[0] * ShoppingCart.getBasePrice();
     }
 
+    cartCopy.sort((a, b) => a - b);
+
     return null;
   }
 }
