@@ -1,16 +1,25 @@
-const basePrice = 8;
+class ShoppingCart {
+  constructor(cart) {
+    this.cart = cart
+  }
 
-const discounts = {
-  twoUniqueBooks: 0.95,
-  threeUniqueBooks: 0.9,
-  fourUniqueBooks: 0.8,
-  fiveUniqueBooks: 0.75,
-};
+  static getBasePrice() {
+    return 8;
+  }
 
-const calcLowestPrice = shoppingCart => 0;
+  static getDiscounts() {
+    return ({
+      twoUniqueBooks: 0.95,
+      threeUniqueBooks: 0.9,
+      fourUniqueBooks: 0.8,
+      fiveUniqueBooks: 0.75,
+    });
+  }
 
-module.exports = {
-  basePrice,
-  discounts,
-  calcLowestPrice
-};
+  calcLowestPrice() {
+    return 'dummy';
+  }
+}
+
+
+module.exports = ShoppingCart;

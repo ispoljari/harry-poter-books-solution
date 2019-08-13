@@ -1,5 +1,5 @@
 const { expect } = require('chai');
-const { calcLowestPrice, basePrice, discounts } = require('../script.js'); //TODO:
+const ShoppingCart = require('../script.js');
 
 const assertResponse = basicCases => {
   basicCases.forEach(input => {
